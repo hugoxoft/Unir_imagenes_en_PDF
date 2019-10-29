@@ -1,0 +1,18 @@
+Imports System.IO
+Imports iTextSharp.text
+Imports iTextSharp.text.html.simpleparser
+Imports iTextSharp.text.pdf
+
+Partial Class uneimagenes_Default1
+    Inherits System.Web.UI.Page
+    Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim v_imagen As String = "C:\archivosgeneradospdf\imagen1.png"
+        Dim v_archivopdf As String = "C:\archivosgeneradospdf\archivo.pdf"
+        Using crea_archivo = New iTextSharp.text.Document
+            iTextSharp.text.pdf.PdfWriter.GetInstance(crea_archivo, New FileStream(v_archivopdf, FileMode.Create))
+            crea_archivo.Open() ' Crea el archivo PDF
+            Dim image As iTextSharp.text.Image = iTextSharp.text.Image.GetInstance(v_imagen)
+            crea_archivo.Add(image) 'Anexa la imagen al archivo PDF
+        End Using
+    End Sub
+End Class
